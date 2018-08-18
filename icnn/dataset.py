@@ -66,36 +66,36 @@ class ClassificationDatasetPatchesMinimal(object):
         tic = time.time()
         for name in self.train_fnames:
             self.train_data.append(load_matlab_file(os.path.join(self.descs_path, name), self.desc_field).squeeze())
-        print "elapsed time %f" % (time.time() - tic)
+        print("elapsed time %f" % (time.time() - tic))
         print("Loading test descs")
         tic = time.time()
         for name in self.test_fnames:
             self.test_data.append(load_matlab_file(os.path.join(self.descs_path, name), self.desc_field).squeeze())
-        print "elapsed time %f" % (time.time() - tic)
+        print("elapsed time %f" % (time.time() - tic))
 
-        print "Loading train patches"
+        print("Loading train patches")
         tic = time.time()
         for name in self.train_fnames:
             self.train_patches.append(load_matlab_file(os.path.join(self.patches_path, name), self.patch_field))
-        print "elapsed time %f" % (time.time() - tic)
-        print "Loading test patches"
+        print("elapsed time %f" % (time.time() - tic))
+        print("Loading test patches")
         tic = time.time()
         for name in self.test_fnames:
             self.test_patches.append(load_matlab_file(os.path.join(self.patches_path, name), self.patch_field))
-        print "elapsed time %f" % (time.time() - tic)
+        print("elapsed time %f" % (time.time() - tic))
 
-        print "Loading train labels"
+        print("Loading train labels")
         tic = time.time()
         for name in self.train_fnames:
             self.train_labels.append(load_matlab_file(os.path.join(self.labels_path, name),
                                                       self.label_field).astype(np.int32).flatten() - 1)
-        print "elapsed time %f" % (time.time() - tic)
-        print "Loading test labels"
+        print("elapsed time %f" % (time.time() - tic))
+        print("Loading test labels")
         tic = time.time()
         for name in self.test_fnames:
             self.test_labels.append(load_matlab_file(os.path.join(self.labels_path, name),
                                                      self.label_field).astype(np.int32).flatten() - 1)
-        print "elapsed time %f" % (time.time() - tic)
+        print("elapsed time %f" % (time.time() - tic))
 
     def get_data_ndims(self):
         return self.train_data[0].shape[1]
