@@ -1,6 +1,6 @@
 import h5py
 import logging
-import cPickle
+import pickle
 import zlib
 import numpy as np
 
@@ -16,7 +16,7 @@ class Snapshotter(object):
 
     def store(self, k, v):
         logging.info("{} storing {}".format(self.TAG, k))
-        v_ = np.void(zlib.compress(cPickle.dumps(v, protocol=cPickle.HIGHEST_PROTOCOL)))
+        v_ = np.void(zlib.compress(pickle.dumps(v, protocol=pickle.HIGHEST_PROTOCOL)))
 
         if k in self.db:
             logging.error("{} Overwriting group {}!".format(self.TAG, k))
@@ -25,7 +25,7 @@ class Snapshotter(object):
         self.db[k] = [v_]
 
     def load(self, k):
-        return cPickle.loads(zlib.decompress(self.db[k][:][0].tostring()))
+        return pickle.loads(zlib.decompress(self.db[k][:][0].tostring()))
 
     def close(self):
         self.db.close()
