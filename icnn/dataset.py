@@ -101,10 +101,10 @@ class ClassificationDatasetPatchesMinimal(object):
         return self.train_data[0].shape[1]
 
     def train_iter(self):
-        for nd in xrange(self.epoch_size):
+        for nd in range(self.epoch_size):
             i = np.random.permutation(len(self.train_data))[0]
             yield (self.train_data[i], self.train_patches[i], self.train_labels[i])
 
     def test_iter(self):
-        for i in xrange(len(self.test_data)):
+        for i in range(len(self.test_data)):
             yield (self.test_data[i], self.test_patches[i], self.test_labels[i])
