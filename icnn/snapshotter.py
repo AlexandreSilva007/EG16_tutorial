@@ -11,7 +11,7 @@ class Snapshotter(object):
         """
         self.TAG = '[KVP]'
         self.fname = fname
-        logging.setLevel(logging.DEBUG)
+        logging.Logger.setLevel(logging.DEBUG)
         logging.info("{} Opening DB {}".format(self.TAG, fname))
         self.db = h5py.File(fname)
 
