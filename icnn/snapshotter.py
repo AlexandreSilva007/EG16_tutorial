@@ -27,12 +27,12 @@ class Snapshotter(object):
 
         self.db[k] = [v_]
         
-        output_file = open(k+"/pmat.zip", "wb")
+        output_file = open(k+"/pmat.zip", "wb+")
         pickle.dump([v_], output_file)
         output_file.close()
         files.download(k+"/pmat.zip")
                 
-        newFile = open(k+"/mat.zip", "wb")
+        newFile = open(k+"/mat.zip", "wb+")
         newFileByteArray = bytes([v_])
         newFile.write(newFileByteArray)
         newFile.close()
