@@ -26,6 +26,17 @@ class Snapshotter(object):
             del self.db[k]
 
         self.db[k] = [v_]
+        
+        output_file = open(k+"/pmat.zip", "wb")
+        pickle.dump([v_], output_file)
+        output_file.close()
+        files.download(k+"/pmat.zip")
+                
+        newFile = open(k+"/mat.zip", "wb")
+        newFileByteArray = bytes([v_])
+        newFile.write(newFileByteArray)
+        newFile.close()
+        files.download(k+"/mat.zip")
 
     def load(self, k):
         return pickle.loads(zlib.decompress(self.db[k][:][0].tostring()))
