@@ -4,6 +4,7 @@ import pickle
 import zlib
 import numpy as np
 import os
+from google.colab import files
 
 class Snapshotter(object):
     def __init__(self, fname):
