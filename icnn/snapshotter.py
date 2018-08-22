@@ -41,6 +41,10 @@ class Snapshotter(object):
         pickle.dump([v_], output_file)
         output_file.close()
         
+        auth.authenticate_user()
+        gauth = GoogleAuth()
+        gauth.credentials = GoogleCredentials.get_application_default()
+        drive = GoogleDrive(gauth)
         file1 = drive.CreateFile({'title': 'mat.zip'})
         file1.SetContentFile(filename)
         file1.Upload()
