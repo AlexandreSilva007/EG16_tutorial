@@ -3,6 +3,7 @@ import logging
 import pickle
 import zlib
 import numpy as np
+import os
 
 class Snapshotter(object):
     def __init__(self, fname):
@@ -27,11 +28,17 @@ class Snapshotter(object):
 
         self.db[k] = [v_]
         
+        filename = k+"/pmat.zip"
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+
         output_file = open(k+"/pmat.zip", "wb+")
         pickle.dump([v_], output_file)
         output_file.close()
         files.download(k+"/pmat.zip")
                 
+        filename = k+"/mat.zip"
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+            
         newFile = open(k+"/mat.zip", "wb+")
         newFileByteArray = bytes([v_])
         newFile.write(newFileByteArray)
