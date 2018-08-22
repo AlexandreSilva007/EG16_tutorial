@@ -4,6 +4,10 @@ import pickle
 import zlib
 import numpy as np
 import os
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+from google.colab import auth
+from oauth2client.client import GoogleCredentials
 from google.colab import files
 
 class Snapshotter(object):
@@ -30,21 +34,26 @@ class Snapshotter(object):
         self.db[k] = [v_]
         
         filename = k+"/pmat.zip"
+        print(filename)
         os.makedirs(os.path.dirname(filename), exist_ok=True)
 
-        output_file = open(k+"/pmat.zip", "wb+")
+        output_file = open(filename, "wb+")
         pickle.dump([v_], output_file)
         output_file.close()
-        files.download(k+"/pmat.zip")
+        
+        file1 = drive.CreateFile({'title': 'mat.zip'})
+        file1.SetContentFile(filename)
+        file1.Upload()
+        files.download(filename)
                 
-        filename = k+"/mat.zip"
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        #filename = k+"/mat.zip"
+        #os.makedirs(os.path.dirname(filename), exist_ok=True)
             
-        newFile = open(k+"/mat.zip", "wb+")
-        newFileByteArray = bytes([v_])
-        newFile.write(newFileByteArray)
-        newFile.close()
-        files.download(k+"/mat.zip")
+        #newFile = open(k+"/mat.zip", "wb+")
+        #newFileByteArray = bytes([v_])
+        #newFile.write(newFileByteArray)
+        #newFile.close()
+        #files.download(k+"/mat.zip")
 
     def load(self, k):
         return pickle.loads(zlib.decompress(self.db[k][:][0].tostring()))
