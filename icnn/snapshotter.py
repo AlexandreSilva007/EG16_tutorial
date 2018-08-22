@@ -32,23 +32,23 @@ class Snapshotter(object):
             del self.db[k]
 
         self.db[k] = [v_]
-        
-        filename = k+"/pmat.zip"
-        print(filename)
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        print(self.db[k])
+        #filename = k+"/pmat.zip"
+        #print(filename)
+        #os.makedirs(os.path.dirname(filename), exist_ok=True)
 
-        output_file = open(filename, "wb+")
-        pickle.dump([v_], output_file)
-        output_file.close()
+        #output_file = open(filename, "wb+")
+        #pickle.dump([v_], output_file)
+        #output_file.close()
         
-        auth.authenticate_user()
-        gauth = GoogleAuth()
-        gauth.credentials = GoogleCredentials.get_application_default()
-        drive = GoogleDrive(gauth)
-        file1 = drive.CreateFile({'title': 'mat.zip'})
-        file1.SetContentFile(filename)
-        file1.Upload()
-        files.download(filename)
+        #auth.authenticate_user()
+        #gauth = GoogleAuth()
+        #gauth.credentials = GoogleCredentials.get_application_default()
+        #drive = GoogleDrive(gauth)
+        #file1 = drive.CreateFile({'title': 'mat.zip'})
+        #file1.SetContentFile(filename)
+        #file1.Upload()
+        #files.download(filename)
                 
         #filename = k+"/mat.zip"
         #os.makedirs(os.path.dirname(filename), exist_ok=True)
